@@ -7,6 +7,7 @@ def home(request):
     context = {'tareas':tareas}
     return render(request, 'todo/home.html', context)
 
+#-> Funcionalidad para agregar tarea
 def agregar(request):
     if request.method == "POST":
         form = TareaForm(request.POST)
@@ -19,11 +20,13 @@ def agregar(request):
     context= {'form':form}
     return render(request, 'todo/agregar.html', context)
 
+#-> Funcionalidad para eliminar tarea
 def eliminar(request,tarea_id):
     tarea = Tarea.objects.get(id=tarea_id)
     tarea.delete()
     return redirect('home')
 
+#-> Funcionalidad para editar tarea
 def editar(request, tarea_id):
     tarea = Tarea.objects.get(id=tarea_id)
     if request.method == "POST":
